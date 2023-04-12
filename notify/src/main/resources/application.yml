@@ -1,0 +1,22 @@
+server:
+  port: 8085
+
+
+
+spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: projetointegracao789@gmail.com
+    password: jvvizczfyvycamcn
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true

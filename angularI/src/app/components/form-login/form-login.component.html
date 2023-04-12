@@ -1,0 +1,39 @@
+<div
+  class="border border-danger main d-flex flex-column justify-content-center align-items-center"
+>
+
+  <form
+    [formGroup]="formGroup"
+    class="form  p-5 "
+    #forDir="ngForm"
+    (ngSubmit)="submit()"
+  >
+  <div class="login">Logar no sistema</div>
+    <div class="form-floating m-3">
+      <input
+        id="name"
+        placeholder="name"
+        formControlName="name"
+        class="form-control"
+      />
+      <label for="name">name</label>
+
+      <div class="error" *ngIf="name?.errors?.['required']">nome é necessário</div>
+    </div>
+    <div class="form-floating m-3">
+      <input
+        id="password"
+        type="password"
+        placeholder="password"
+        formControlName="password"
+        class="form-control"
+      />
+      <label for="password">password</label>
+
+      <div class="error" *ngIf="password?.errors?.['required']">senha é necessária</div>
+
+      <button type="submit" class="btn mt-4" >submit</button>
+    </div>
+    <div class="error ms-3" *ngIf="error">{{error}}</div>
+  </form>
+</div>

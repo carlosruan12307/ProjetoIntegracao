@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  notifyserver:
+    depends_on:
+      - server
+      - rabbitmq
+    restart: on-failure
+    build: notify/.
+    ports:
+      - 8085:8085
+
+  front:
+    depends_on:
+        - server
+    restart: on-failure
+    build: angularI/.
+    environment:
+      URL_BACK: http://server:8080
+    ports:
+      - 80:80
+  server:
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/projeto
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123
+    depends_on:
+      - db
+      - rabbitmq
+    restart: on-failure
+    build: auth/.
+    
+    ports:
+      - 8081:8080
+  db:
+    image: mysql:5.7
+
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: projeto
+      MYSQL_ROOT_PASSWORD: 123
+    ports:
+      - 3307:3306
+  rabbitmq:
+    image: rabbitmq:3.7.8-management
+    ports:
+      - 60000:5672
+      - 61000:15672
+   
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
