@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class HttpServiceService {
 LoggedIn:boolean = false;
-apiURL:string = "http://localhost:8081";
+apiURL:string = "http://54.87.140.201:8081";
 
   constructor(private http: HttpClient) {
 
