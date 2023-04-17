@@ -12,12 +12,11 @@ import com.notify.notify.models.EmailModel;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Slf4j
 public class SendEmailService {
     private final JavaMailSender javaMailSender;
-
-    
 
     public SendEmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -25,23 +24,24 @@ public class SendEmailService {
 
     public void enviar(EmailModel eModel) {
         log.info("Enviando email simples");
-try {
-    SimpleMailMessage mensagem = new SimpleMailMessage();
-        mensagem.setFrom(eModel.getEmailFrom());
-        mensagem.setTo(eModel.getEmailTo());
+        try {
+            SimpleMailMessage mensagem = new SimpleMailMessage();
+            mensagem.setFrom(eModel.getEmailFrom());
+            mensagem.setTo(eModel.getEmailTo());
 
-        mensagem.setSubject(eModel.getSubject());
-        mensagem.setText(eModel.getText());
-    
-        javaMailSender.send(mensagem);
-        log.info("Email enviado com sucesso!");
-} catch (MailException e) {
-    // TODO: handle exception
-}
-        
+            mensagem.setSubject(eModel.getSubject());
+            mensagem.setText(eModel.getText());
+
+            javaMailSender.send(mensagem);
+            log.info("Email enviado com sucesso!");
+        } catch (MailException e) {
+            System.out.println(e);
+        }
+
     }
 
-    public void enviarEmailComAnexo(String para, String titulo, String conteudo, String arquivo) throws MessagingException {
+    public void enviarEmailComAnexo(String para, String titulo, String conteudo, String arquivo)
+            throws MessagingException {
         log.info("Enviando email com anexo");
         MimeMessage mensagem = javaMailSender.createMimeMessage();
 

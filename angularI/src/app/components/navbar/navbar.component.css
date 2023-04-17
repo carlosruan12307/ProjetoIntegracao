@@ -1,0 +1,35 @@
+.navbar {
+  background-color: black;
+}
+
+.nav-item {
+  margin-inline: 2em;
+}
+.logo {
+  transition: transform 5s ease-in-out;
+}
+@keyframes logor {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+.logo:hover {
+  animation: logor 5s ease-in-out infinite;
+}
+.active {
+  color: white;
+  background-color: red;
+}
+li {
+  color: blue;
+}
+a {
+  border-radius: 0.6em;
+}
+a:hover {
+  background-color: rgb(54, 157, 189);
+  color: white;
+}

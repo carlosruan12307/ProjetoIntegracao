@@ -1,8 +1,6 @@
 server:
   port: 8085
 
-
-
 spring:
   rabbitmq:
     host: rabbitmq
@@ -12,8 +10,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: projetointegracao789@gmail.com
-    password: jvvizczfyvycamcn
+    username: "" # emailfrom, usado para enviar
+    password: "" # password app key email
     properties:
       mail:
         smtp:

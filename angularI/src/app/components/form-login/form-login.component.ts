@@ -20,39 +20,33 @@ export class FormLoginComponent implements OnInit {
   constructor(private service: HttpServiceService, private router: Router) {}
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      name: new FormControl('', [
-        Validators.required,
-        (AC: AbstractControl) => {
-          if (AC.value == 'a') {
-            return { teste: true };
-          }
-          return { teste: false };
-        },
-      ]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', Validators.required),
     });
   }
 
   submit() {
-    console.log(this.formGroup.get('name')?.value);
-    this.service.login(this.formGroup).subscribe({
-      next: (valor) => {
-        if (valor.mensagem != null) {
-          this.service.LoggedIn = true;
-          console.log(valor.mensagem);
-          this.error = '';
-          this.router.navigate(['/home']);
-        }
-      },
-      error: (error) => {
-        this.error = 'login ou senha invalida';
-        console.log('deu erro barao, tai o erro pra tu: ' + error.message);
-        console.log(error);
-      },
-    });
+    console.log(this.formGroup.get('email')?.value);
+    // this.service.login(this.formGroup).subscribe({
+    //   next: (valor) => {
+    //     if (valor.mensagem != null) {
+    //       this.service.LoggedIn = true;
+    //       console.log(valor.mensagem);
+    //       this.error = '';
+    //       this.router.navigate(['/home']);
+    //     }
+    //   },
+    //   error: (error) => {
+    //     this.error = 'login ou senha invalida';
+    //     console.log('deu erro barao, tai o erro pra tu: ' + error.message);
+    //     console.log(error);
+    //   },
+    // });
+    this.service.LoggedIn = true;
+    this.router.navigate(['/home']);
   }
-  get name() {
-    return this.formGroup.get('name');
+  get email() {
+    return this.formGroup.get('email');
   }
 
   get password() {

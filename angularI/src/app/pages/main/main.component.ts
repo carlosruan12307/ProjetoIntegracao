@@ -6,25 +6,21 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
-  constructor(private service:HttpServiceService, private router:Router){
+  constructor(private service: HttpServiceService, private router: Router) {}
 
-  }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-
-  }
-
-  logout(){
+  logout() {
     this.service.logout().subscribe({
-      next: valor => {
-        this.router.navigate([""] )
+      next: (valor) => {
+        this.router.navigate(['']);
       },
-      error: error => {
-        console.log(error)
-      }
-    })
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }

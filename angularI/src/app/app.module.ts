@@ -7,13 +7,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { MainComponent } from './pages/main/main.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { GoogleloginComponent } from './components/googlelogin/googlelogin.component';
+import { TesteComponent } from './components/teste/teste.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 
     FormLoginComponent,
-     MainComponent
+     MainComponent,
+     NavbarComponent,
+     GoogleloginComponent,
+     TesteComponent
   ],
   imports: [
     BrowserModule,

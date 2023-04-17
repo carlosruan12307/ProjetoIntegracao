@@ -1,5 +1,7 @@
 package com.auth.auth.controllers;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.security.Security;
 
 import org.springframework.amqp.core.Message;
@@ -13,10 +15,18 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.auth.auth.models.EmailModel;
+import com.auth.auth.DTOs.EmailModel;
+import com.auth.auth.DTOs.UserGoogleModel;
+import com.auth.auth.responses.GoogleResponse;
 import com.auth.auth.responses.UserResponse;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.HttpStatusCodes;
+import com.google.api.client.http.HttpTransport;
 
 @RestController
 public class UserController {
@@ -26,17 +36,30 @@ public class UserController {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    com.auth.auth.services.GoogleIdTokenVerifier google;
+
     @GetMapping("/")
-    public String inicio(){
-        return "bem vindo a api";
+    public ResponseEntity<String> inicio() {
+        return ResponseEntity.ok("bem vindo a api");
+    }
+
+    @PostMapping("/loginGoogle")
+
+    public ResponseEntity<UserGoogleModel> loginGoogle(@RequestBody GoogleResponse response)
+            throws GeneralSecurityException, IOException {
+
+        return ResponseEntity.ok().body(google.verifierAndReturnDataUser(response));
+
     }
 
     @GetMapping("/login")
-    public ResponseEntity<UserResponse> inicio(@AuthenticationPrincipal User user) {
+    public ResponseEntity<UserResponse> login(@AuthenticationPrincipal User user) {
         ur.setMensagem(user.getUsername());
-        
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        EmailModel email = new EmailModel("projetointegracao789@gmail.com",auth.getName(),"projeto","Parabens! voce fez o login");
+        EmailModel email = new EmailModel("projetointegracao45607@gmail.com", auth.getName(), "projeto",
+                "Parabens! voce fez o login");
         String routingKey = "orders.v1.user-logged";
         rabbitTemplate.convertAndSend(routingKey, email);
         return new ResponseEntity<UserResponse>(ur, HttpStatus.OK);

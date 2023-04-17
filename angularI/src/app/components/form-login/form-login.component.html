@@ -1,39 +1,78 @@
-<div
-  class="border border-danger main d-flex flex-column justify-content-center align-items-center"
->
-
+<div class="d-flex justify-content-center align-items-center h-100">
   <form
+    class="d-flex flex-column align-items-center justify-content-center"
     [formGroup]="formGroup"
-    class="form  p-5 "
-    #forDir="ngForm"
-    (ngSubmit)="submit()"
+    #formDir="ngForm"
   >
-  <div class="login">Logar no sistema</div>
-    <div class="form-floating m-3">
-      <input
-        id="name"
-        placeholder="name"
-        formControlName="name"
-        class="form-control"
-      />
-      <label for="name">name</label>
+    <h1 class="m-5">LOGAR NO SISTEMA</h1>
+    <div class="container-inputs">
+      <div class="input-group mb-3">
+        <div class="input-group-text">
+          <i class="fa-solid fa-user fa-style"></i>
+        </div>
+        <div class="form-floating">
+          <input
+            id="teste"
+            class="form-control"
+            formControlName="email"
+            placeholder="email"
+          />
 
-      <div class="error" *ngIf="name?.errors?.['required']">nome é necessário</div>
+          <label for="teste" class="form-label">email</label>
+        </div>
+      </div>
+
+      <h5 *ngIf="this.email?.errors?.['required']" class="text-danger mb-3">
+        usuario precisa existir
+      </h5>
+      <div class="input-group mb-3">
+        <div class="input-group-text">
+          <i class="fa-solid fa-lock fa-style"></i>
+        </div>
+        <div class="form-floating">
+          <input
+            id="teste"
+            class="form-control"
+            formControlName="password"
+            placeholder="password"
+          />
+          <label for="teste" class="form-label">password</label>
+        </div>
+      </div>
+
+      <h5
+        *ngIf="this.password?.errors?.['required']"
+        class="text-danger mt-2 mb-2"
+      >
+        senha precisa existir
+      </h5>
     </div>
-    <div class="form-floating m-3">
-      <input
-        id="password"
-        type="password"
-        placeholder="password"
-        formControlName="password"
-        class="form-control"
-      />
-      <label for="password">password</label>
-
-      <div class="error" *ngIf="password?.errors?.['required']">senha é necessária</div>
-
-      <button type="submit" class="btn mt-4" >submit</button>
+    <div
+      class="container-btn-login d-flex flex-column justify-content-center align-items-center"
+    >
+      <div class="container-rem-forg d-flex w-100">
+        <div class="form-check ms-2 mt-2">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+          />
+          <label class="form-check-label text-white" for="flexCheckDefault">
+            Remember me
+          </label>
+        </div>
+        <button class="button-forgot btn btn-outline-light">
+          Forgot Password?
+        </button>
+      </div>
+      <button
+        (click)="submit()"
+        class="btn-login btn btn-outline-dark text-white"
+      >
+        login
+      </button>
+      <app-googlelogin></app-googlelogin>
     </div>
-    <div class="error ms-3" *ngIf="error">{{error}}</div>
   </form>
 </div>

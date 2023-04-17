@@ -1,4 +1,4 @@
-package com.auth.auth.models;
+package com.auth.auth.DTOs;
 
 import java.io.Serializable;
 
@@ -17,7 +17,5 @@ public class EmailModel implements Serializable {
     private String emailTo;
     private String subject;
     private String text;
-        
 
 }
-

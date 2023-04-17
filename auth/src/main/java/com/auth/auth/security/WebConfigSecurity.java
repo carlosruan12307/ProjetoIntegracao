@@ -28,50 +28,48 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 public class WebConfigSecurity {
-    
-    
-    
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        return http
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-                    .csrf().disable()
-                    .cors().configurationSource(new CorsConfigurationSource() {
 
-                        @Override
-                        public CorsConfiguration getCorsConfiguration(HttpServletRequest arg0) {
-                            CorsConfiguration config = new CorsConfiguration();
-                            config.setAllowedOrigins(Collections.singletonList("*"));
-                            config.setAllowedMethods(Collections.singletonList("*"));
-                            config.setAllowedHeaders(Collections.singletonList("Authorization"));
-                            return config;
-                            }
-                        
-                    })
-                    .and()
-                    .httpBasic()
-                    .and()
-                    .addFilterAfter(new GeneratorJWTFilter(),  BasicAuthenticationFilter.class)
-                    .addFilterBefore(new ValidatorJWTFilter(), BasicAuthenticationFilter.class)
-                    
-                    
-                    
-                    .authorizeHttpRequests()
-                    .requestMatchers(HttpMethod.GET,"/login").authenticated()
-                    .requestMatchers(HttpMethod.GET,"/admin").hasAnyRole("ADMIN")
-                    .anyRequest().authenticated()
-                    .and()
-                    .logout()
-                    .addLogoutHandler(new LogoutFilter())
-                    .logoutUrl("/logout")
-                    .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()))
-                    .and()
-                    .build();
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .csrf().disable()
+                .cors().configurationSource(new CorsConfigurationSource() {
+
+                    @Override
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest arg0) {
+                        CorsConfiguration config = new CorsConfiguration();
+                        config.setAllowedOrigins(Collections.singletonList("*"));
+                        config.setAllowedMethods(Collections.singletonList("*"));
+                        config.setAllowedHeaders(Collections.singletonList("Authorization"));
+                        return config;
+                    }
+
+                })
+                .and()
+                .httpBasic()
+                .and()
+                .addFilterAfter(new GeneratorJWTFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new ValidatorJWTFilter(), BasicAuthenticationFilter.class)
+
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.GET, "/login").authenticated()
+                .requestMatchers(HttpMethod.POST, "/loginGoogle").permitAll()
+                .requestMatchers(HttpMethod.GET, "/admin").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/").permitAll()
+
+                .and()
+                .logout()
+                .addLogoutHandler(new LogoutFilter())
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()))
+                .and()
+                .build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
