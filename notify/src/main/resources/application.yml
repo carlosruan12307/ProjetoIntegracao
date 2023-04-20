@@ -10,7 +10,7 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: "" # emailfrom, usado para enviar
+    username: "" # emailfrom, usado para
     password: "" # password app key email
     properties:
       mail:

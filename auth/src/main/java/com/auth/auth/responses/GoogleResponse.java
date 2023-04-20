@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GoogleResponse {
-    private String client_id;
-    private String credential;
+
+    private String idToken;
 }

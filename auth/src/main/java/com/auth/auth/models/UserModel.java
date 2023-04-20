@@ -39,20 +39,23 @@ public class UserModel implements UserDetails {
 
     String password;
 
+    String pictureURL;
     @ManyToMany()
-    @JoinTable(
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-        
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id")
+
     )
     List<RoleModel> roles = new ArrayList<>();
 
-
+    public UserModel(String email, Collection<? extends GrantedAuthority> collection, String pictureURL) {
+        this.email = email;
+        this.roles = (List<RoleModel>) collection;
+        this.pictureURL = pictureURL;
+    }
 
     public UserModel(String email, String password, List<RoleModel> roles) {
         this.email = email;
-        this.password = password;
         this.roles = roles;
+        this.password = password;
     }
 
     @Override
@@ -65,7 +68,7 @@ public class UserModel implements UserDetails {
     public String getPassword() {
         // TODO Auto-generated method stub
         return this.password;
-        
+
     }
 
     @Override

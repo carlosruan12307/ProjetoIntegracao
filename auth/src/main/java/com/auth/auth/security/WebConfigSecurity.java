@@ -22,12 +22,18 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import com.auth.auth.filters.GeneratorJWTFilter;
 import com.auth.auth.filters.LogoutFilter;
 import com.auth.auth.filters.ValidatorJWTFilter;
+import com.auth.auth.services.GoogleIdTokenVerifier;
+import com.auth.auth.services.JWTService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 public class WebConfigSecurity {
+    @Autowired
+    JWTService jwtService;
+    @Autowired
+    GoogleIdTokenVerifier googleIdTokenVerifier;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,6 +41,7 @@ public class WebConfigSecurity {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable()
+                .anonymous().disable()
                 .cors().configurationSource(new CorsConfigurationSource() {
 
                     @Override
@@ -42,7 +49,7 @@ public class WebConfigSecurity {
                         CorsConfiguration config = new CorsConfiguration();
                         config.setAllowedOrigins(Collections.singletonList("*"));
                         config.setAllowedMethods(Collections.singletonList("*"));
-                        config.setAllowedHeaders(Collections.singletonList("Authorization"));
+                        config.setAllowedHeaders(Collections.singletonList("*"));
                         return config;
                     }
 
@@ -50,12 +57,14 @@ public class WebConfigSecurity {
                 .and()
                 .httpBasic()
                 .and()
-                .addFilterAfter(new GeneratorJWTFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new ValidatorJWTFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new GeneratorJWTFilter(jwtService, googleIdTokenVerifier),
+                        BasicAuthenticationFilter.class)
+                .addFilterBefore(new ValidatorJWTFilter(jwtService), BasicAuthenticationFilter.class)
 
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/login").authenticated()
-                .requestMatchers(HttpMethod.POST, "/loginGoogle").permitAll()
+                .requestMatchers(HttpMethod.GET, "/loginGoogle").permitAll()
+                .requestMatchers(HttpMethod.GET, "/getValuesJWT").permitAll()
                 .requestMatchers(HttpMethod.GET, "/admin").hasAnyRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/").permitAll()
 

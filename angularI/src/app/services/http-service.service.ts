@@ -35,12 +35,14 @@ export class HttpServiceService {
     });
   }
   LoginWithGoogle(credentials: string): Observable<any> {
+    console.log(credentials);
     return this.http.post<any>(
       this.apiURL + 'LoginWithGoogle',
       JSON.stringify(credentials),
       {
         headers: {
           'Content-type': 'application/json',
+          credentials: credentials,
         },
       }
     );

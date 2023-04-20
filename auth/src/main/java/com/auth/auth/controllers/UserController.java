@@ -17,16 +17,23 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.WebUtils;
 
 import com.auth.auth.DTOs.EmailModel;
-import com.auth.auth.DTOs.UserGoogleModel;
+import com.auth.auth.DTOs.JwtClaimsModel;
+import com.auth.auth.models.UserModel;
 import com.auth.auth.responses.GoogleResponse;
 import com.auth.auth.responses.UserResponse;
+import com.auth.auth.services.JWTService;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.client.http.HttpTransport;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class UserController {
@@ -35,6 +42,8 @@ public class UserController {
 
     @Autowired
     RabbitTemplate rabbitTemplate;
+    @Autowired
+    JWTService jwtService;
 
     @Autowired
     com.auth.auth.services.GoogleIdTokenVerifier google;
@@ -44,13 +53,18 @@ public class UserController {
         return ResponseEntity.ok("bem vindo a api");
     }
 
-    @PostMapping("/loginGoogle")
+    @GetMapping("/getValuesJWT")
+    public ResponseEntity<JwtClaimsModel> valuesJWT(HttpServletRequest httpServletRequest) {
+        Cookie cookie = WebUtils.getCookie(httpServletRequest, "jwt");
+        String jwt = cookie.getValue().toString();
+        JwtClaimsModel userModel = jwtService.jwtGetValues(jwt);
+        return ResponseEntity.ok().body(userModel);
 
-    public ResponseEntity<UserGoogleModel> loginGoogle(@RequestBody GoogleResponse response)
-            throws GeneralSecurityException, IOException {
+    }
 
-        return ResponseEntity.ok().body(google.verifierAndReturnDataUser(response));
-
+    @GetMapping("/loginGoogle")
+    public String loginGoogle() {
+        return "logado com google";
     }
 
     @GetMapping("/login")

@@ -1,91 +1,72 @@
-.container-inputs,
-.container-btn-login {
-  /* border: 3px solid blue; */
-  width: 75%;
-}
-
-.fa-style {
-  color: black;
-
-  font-size: 1.5em;
-}
-
-h1 {
-  color: white;
-}
-.main {
+.container-pagelogin {
+  display: flex;
+  /* border: 5px solid red; */
   height: 100%;
 }
 .btn-login {
-  border: 3px solid green;
-  border-radius: 3em;
-  width: 40%;
-  font-size: 1.5em;
-  margin: 1em;
+  color: white;
+  background-color: #0c9fcc;
+}
+.btn-login:hover {
+  background-color: #0c80a3;
+}
+.container-imagem {
+  width: 50%;
+  /* border: 5px solid blue; */
+  background-color: #0c9fcc;
+}
+.container-label-input {
+  display: flex;
+  flex-direction: column;
+}
+.container-form {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+  /* border: 5px solid yellow; */
+}
+.container-check-forgot {
+  display: flex;
+  /* border: 5px solid red; */
+}
+.forgot {
+  margin-left: auto;
+  color: #0c9fcc;
+}
+.container-redes_sociais {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 5px solid red; */
 }
 form {
-  background-color: rgba(0, 0, 0, 0.671);
-  height: 70%;
-  width: 30%;
-  border-radius: 10%;
-  box-shadow: 1px 5px 10px 10px;
-  transition: box-shadow 0.6s ease-in-out;
-}
-form:hover {
-  box-shadow: none;
-}
-.form-control {
-  border-radius: 2em;
-}
-.logar {
-  text-align: center;
-}
-.button-forgot {
-  margin-left: auto;
-}
+  /* border: 5px solid green; */
 
-.form-floating {
-  display: flex;
+  box-shadow: 0px 10px 10px 5px #0c9fcc;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 50%;
 }
-@media screen and (max-width: 1600px), screen and (max-height: 690px) {
+@media screen and (max-width: 992px) {
   form {
-    height: 90%;
-    width: 35%;
+    width: 80%;
   }
-  @media screen and (max-width: 1350px), screen and (max-height: 1350px) {
-    form {
-      height: 50%;
-      width: 50%;
-    }
+}
+@media screen and (max-width: 664px) {
+  form {
+    width: 100%;
   }
-  @media screen and (max-width: 1350px), screen and (max-height: 920px) {
-    form {
-      height: 70%;
-      width: 50%;
-    }
+}
+@media screen and (max-width: 524px) {
+  .container-check-forgot {
+    flex-wrap: nowrap;
+    flex-direction: column;
   }
-  @media screen and (max-width: 859px) {
-    form {
-      height: 85%;
-      width: 70%;
-    }
-  }
-  @media screen and (max-width: 420px), screen and (max-height: 650px) {
-    .container-rem-forg {
-      flex-direction: column;
-      align-items: center;
-    }
-    .button-forgot {
-      margin-left: 0.8em;
-      margin-top: 1em;
-    }
-    .btn-login {
-      width: 90%;
-    }
-  }
-  @media screen and (max-height: 690px) {
-    form {
-      height: 100%;
-    }
+  .forgot {
+    margin: 1.2em;
   }
 }

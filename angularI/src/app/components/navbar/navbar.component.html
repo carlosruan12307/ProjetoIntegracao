@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark d-flex">
+<nav class="navbar navbar-expand-md navbar-dark">
   <div class="navbar-brand ms-5 logo">LOGO</div>
   <button
     class="navbar-toggler d-lg-none"
@@ -8,10 +8,12 @@
     aria-controls="collapsibleNavId"
     aria-expanded="false"
     aria-label="Toggle navigation"
-  ></button>
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
-    <ul class="navbar-nav w-100 me-5">
-      <li class="nav-item ms-auto">
+    <ul class="navbar-nav w-100 d-flex justify-content-end">
+      <li class="nav-item">
         <a
           class="nav-link"
           [routerLink]="['']"
