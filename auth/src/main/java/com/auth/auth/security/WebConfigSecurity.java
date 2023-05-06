@@ -2,19 +2,19 @@ package com.auth.auth.security;
 
 import java.util.Collections;
 
-import org.apache.catalina.authenticator.BasicAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
+
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -26,7 +26,6 @@ import com.auth.auth.services.GoogleIdTokenVerifier;
 import com.auth.auth.services.JWTService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 
 @Configuration
 public class WebConfigSecurity {
@@ -47,7 +46,8 @@ public class WebConfigSecurity {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest arg0) {
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(Collections.singletonList("*"));
+                        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+                        config.setAllowCredentials(true);
                         config.setAllowedMethods(Collections.singletonList("*"));
                         config.setAllowedHeaders(Collections.singletonList("*"));
                         return config;
@@ -81,4 +81,10 @@ public class WebConfigSecurity {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers(HttpMethod.GET, "/images/**");
+    }
+
 }

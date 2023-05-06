@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 
 @Service
-public class LogoutFilter implements LogoutHandler{
+public class LogoutFilter implements LogoutHandler {
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
@@ -18,5 +17,5 @@ public class LogoutFilter implements LogoutHandler{
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
     }
-    
+
 }

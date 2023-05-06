@@ -3,35 +3,27 @@ package com.auth.auth.services;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
+
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Service;
 
 import com.auth.auth.DTOs.JwtClaimsModel;
-import com.auth.auth.models.RoleModel;
+
 import com.auth.auth.models.UserModel;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class JWTService {

@@ -1,11 +1,9 @@
 package com.auth.auth.filters;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.crypto.SecretKey;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
-import com.auth.auth.models.RoleModel;
 import com.auth.auth.services.JWTService;
 
 import io.jsonwebtoken.Claims;
@@ -65,6 +62,6 @@ public class ValidatorJWTFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         // TODO Auto-generated method stub
         return request.getServletPath().equals("/login") || request.getServletPath().equals("/")
-                || request.getServletPath().equals("/loginGoogle");
+                || request.getServletPath().equals("/loginGoogle") || request.getServletPath().equals("/images/**");
     }
 }

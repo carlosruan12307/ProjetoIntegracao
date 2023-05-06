@@ -6,17 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import com.auth.auth.DTOs.JwtClaimsModel;
+import org.springframework.stereotype.Service;
 
 import com.auth.auth.enums.RoleEnum;
 import com.auth.auth.models.RoleModel;
 import com.auth.auth.models.UserModel;
-import com.auth.auth.responses.GoogleResponse;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.http.javanet.NetHttpTransport;

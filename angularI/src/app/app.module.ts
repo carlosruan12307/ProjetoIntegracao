@@ -5,21 +5,33 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormLoginComponent } from './components/form-login/form-login.component';
+import { HomeComponent } from './components/home/home.component';
 import { MainComponent } from './pages/main/main.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { GoogleloginComponent } from './components/googlelogin/googlelogin.component';
 import { TesteComponent } from './components/teste/teste.component';
+import { ModalMoviesComponent } from './components/modal-movies/modal-movies.component';
+import { OffcanvasUserComponent } from './components/offcanvas-user/offcanvas-user.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CardComponent } from './components/card/card.component';
+import { FormLoginComponent } from './components/form-login/form-login.component';
+import { FormSignUpComponent } from './components/form-sign-up/form-sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 
-    FormLoginComponent,
+    HomeComponent,
      MainComponent,
      NavbarComponent,
      GoogleloginComponent,
-     TesteComponent
+     TesteComponent,
+     ModalMoviesComponent,
+     OffcanvasUserComponent,
+     FooterComponent,
+     CardComponent,
+     FormLoginComponent,
+     FormSignUpComponent
   ],
   imports: [
     BrowserModule,

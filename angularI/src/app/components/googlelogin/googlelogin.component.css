@@ -5,3 +5,6 @@
   border: 3px solid red;
   display: inline;
 }
+button {
+  margin: 50px;
+}

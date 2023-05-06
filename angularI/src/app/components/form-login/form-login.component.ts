@@ -1,13 +1,7 @@
-import { Router, Routes } from '@angular/router';
-import { User } from './../../interfaces/userInterface';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { HttpServiceService } from 'src/app/services/http-service.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/authService/auth-service.service';
 
 @Component({
   selector: 'app-form-login',
@@ -17,21 +11,24 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 export class FormLoginComponent implements OnInit {
   formGroup!: FormGroup;
   error!: string;
-  constructor(private service: HttpServiceService, private router: Router) {}
+  constructor(
+    private service: AuthService,
+    private router: Router,
+    private rout: ActivatedRoute
+  ) {}
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });
   }
-
   submit() {
-    console.log(this.formGroup.get('email')?.value);
+    // console.log(this.formGroup.get('email')?.value);
     // this.service.login(this.formGroup).subscribe({
-    //   next: (valor) => {
-    //     if (valor.mensagem != null) {
+    //   next: (userData) => {
+    //     if (userData != null) {
     //       this.service.LoggedIn = true;
-    //       console.log(valor.mensagem);
+    //       this.service.userData = userData;
     //       this.error = '';
     //       this.router.navigate(['/home']);
     //     }
@@ -43,8 +40,9 @@ export class FormLoginComponent implements OnInit {
     //   },
     // });
     this.service.LoggedIn = true;
-    this.router.navigate(['/home']);
+    this.router.navigate(['/movies']);
   }
+
   get email() {
     return this.formGroup.get('email');
   }

@@ -1,5 +1,14 @@
-<div class="main  d-flex justify-content-center align-items-center">
-<h1>Logado, veja seu email</h1>
+<app-navbar></app-navbar>
 
-<button (click)="logout()">Logout</button>
-</div>
+<!-- <h1>Logado, veja seu email</h1>
+
+  <button class="g_id_signout" (click)="logout()">Logout</button>
+  <button (click)="sub()">testezada admin</button> -->
+
+<app-modal-movies
+  *ngIf="movies && moviesCard"
+  [moviesCard]="moviesCard"
+  [movies]="movies"
+></app-modal-movies>
+
+<!-- fim modal -->

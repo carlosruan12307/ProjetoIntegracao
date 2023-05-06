@@ -1,0 +1,60 @@
+<form [formGroup]="formGroup" #formDir="ngForm" class="">
+  <h1 class="align-self-center">CADASTRO</h1>
+  <div class="form-floating m-3">
+    <input
+      formControlName="email"
+      class="form-control"
+      placeholder="email"
+      id="email"
+      type="email"
+    />
+    <label for="#email">Email</label>
+  </div>
+  <h5 *ngIf="this.email?.errors?.['required']" class="text-danger ms-3">
+    email precisa existir
+  </h5>
+  <div class="form-floating m-3">
+    <input
+      formControlName="password"
+      class="form-control"
+      placeholder="password"
+      id="password"
+      type="password"
+    />
+    <label for="#password">Password</label>
+  </div>
+  <h5 *ngIf="this.password?.errors?.['required']" class="text-danger ms-3">
+    senha precisa existir
+  </h5>
+
+  <div class="form-floating m-3">
+    <input
+      formControlName="name"
+      class="form-control"
+      placeholder="name"
+      id="name"
+      type="text"
+    />
+    <label for="#name">Name</label>
+  </div>
+  <h5 *ngIf="this.name?.errors?.['required']" class="text-danger ms-3">
+    nome precisa existir
+  </h5>
+
+  <div class="form-floating m-3">
+    <input
+      formControlName="phone"
+      class="form-control"
+      placeholder="phone"
+      id="phone"
+      type="number"
+    />
+    <label for="#phone">Phone Number</label>
+  </div>
+  <h5 *ngIf="this.phone?.errors?.['required']" class="text-danger ms-3">
+    telefone precisa existir
+  </h5>
+
+  <button (click)="submit()" class="btn-login btn m-3">Entrar</button>
+  <h5 class="m-3"><a [routerLink]="['/']">Ja tenho uma conta</a></h5>
+</form>

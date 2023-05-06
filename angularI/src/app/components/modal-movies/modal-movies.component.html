@@ -1,0 +1,86 @@
+<div
+  class="container-movies d-flex flex-wrap justify-content-center align-items-center"
+>
+  <app-card [moviesCard]="moviesCard" class="w-100"></app-card>
+  <!-- começo filters-->
+  <div
+    class="w-100 border border-danger filters d-flex justify-content-center align-items-center"
+  >
+    <!-- dropdown genres-->
+
+    <div class="input-group">
+      <select class="custom-select btn" id="inputGroupSelect04">
+        <option selected>All Genres</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <!-- dropdown genres fim-->
+  </div>
+  <!-- fim filters-->
+  <div class="movies" *ngFor="let movie of movies">
+    <img
+      class="images-carrousel"
+      data-bs-toggle="modal"
+      [attr.data-bs-target]="'#' + movie.id"
+      [src]="sani(movie.image)"
+    />
+    <div
+      class="modal fade"
+      id="exampleModal"
+      [id]="movie.id"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body d-flex m-0 p-0">
+            <img
+              [src]="'https://image.tmdb.org/t/p/original' + movie.poster_path"
+              alt=""
+              class="d-block img-poster h-100"
+            />
+            <div
+              class="m-5 container-modal-conteudo d-flex flex-column flex-wrap border border-danger align-items-center"
+            >
+              <h1>{{ movie.title }}</h1>
+              <div
+                class="container-details d-flex flex-wrap align-items-center justify-content-center"
+              >
+                <p class="m-5">{{ movie.release_date }}</p>
+                <p class="m-5">{{ movie.original_language }}</p>
+                <p class="m-5">{{ movie.vote_average }}</p>
+              </div>
+              <p class="border border-primary">{{ movie.overview }}</p>
+            </div>
+
+            <button
+              type="button"
+              class="btn-close m-3"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <!-- <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="footer w-100">
+    <app-footer></app-footer>
+  </div>
+</div>

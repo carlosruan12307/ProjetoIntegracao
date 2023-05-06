@@ -1,0 +1,12 @@
+<div class="container-pagelogin">
+  <div class="container-imagem">
+    <img class="d-block w-100 h-100" src="../../../assets/login.svg" />
+  </div>
+  <div class="container-form">
+    <app-form-login *ngIf="route == '/'" class="form"></app-form-login>
+    <app-form-sign-up
+      class="form"
+      *ngIf="route == '/cadastro'"
+    ></app-form-sign-up>
+  </div>
+</div>

@@ -8,16 +8,16 @@ google:
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db:3306/projeto
+    url: jdbc:mysql://localhost:3306/projeto
     username: root
-    password: "123"
+    password: ""
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
     database-platform: org.hibernate.dialect.MySQLDialect
   rabbitmq:
-    host: rabbitmq #localhost
+    host: localhost #localhost
     port: 5672
-    username: rabbitmq #guest
-    password: rabbitmq #guest
+    username: guest #guest
+    password: guest #guest
